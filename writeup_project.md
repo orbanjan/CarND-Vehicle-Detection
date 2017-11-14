@@ -49,16 +49,15 @@ I then explored different color spaces and different `skimage.hog()` parameters 
 
 Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
-
 ![alt text][image2]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and choosed 'YUV' color space with 'orientation=11' and 'pixels_per_cell=(16,16) and 'cells_per_block= (2,2)'. These values gave me the best accurycy lator on classification with resonable good cycle time as well.
+I tried various combinations of parameters and choosed `YUV` color space with `orientations=11` and `pixels_per_cell=(16, 16)` and `cells_per_block=(2, 2)`. These values gave me the best accuracy later on classification with resonable good cycle time as well.
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using the above mentioned HOG features. I didn not used color features and color histograms at this time as they were not improving significantly the accuracy. 
+I trained a linear SVM using the above mentioned HOG features in #8 code cell. I didn not used color features and color histograms at this time as they were not improving significantly the accuracy. 
 
 ### Sliding Window Search
 
