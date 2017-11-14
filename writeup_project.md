@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+[video1]: ./project_video_out.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
 ### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
@@ -75,7 +75,7 @@ Ultimately I searched on two scales using YUV 3-channel HOG features which provi
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video_out.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -102,5 +102,8 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+I used HOG features with YUV color space all channels without color features. I gave me a good result with resonable car detection and without false positives (due to the heat map tresholds). I was trying to keep the pipilen working fast (ie >3 iterations/sec). More robustness could be achived if we not just use classification to detect object and identify cars/non-car object but rather use other deep learning methods (YOLO for example). I will try to utilize YOLO in my next version. Also I would combine this pipeline with the P4 Lane Findings.
+
+Thanks,
+Janos
 
