@@ -70,6 +70,7 @@ I decided to search window positions with different scales on lower half of the 
 Ultimately I searched on two scales using YUV 3-channel HOG features which provided a nice result. Also it was quit quick during the video pipeline.  Here are some example images:
 
 ![alt text][image4]
+More image could be found in my #11 and #12 code cells.
 ---
 
 ### Video Implementation
