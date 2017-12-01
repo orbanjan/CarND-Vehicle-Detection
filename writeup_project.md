@@ -40,34 +40,33 @@ You're reading it!
 
 The code for this step is contained in the #4 code cell of the IPython notebook (`Vehicle-Detection_P5.ipynb`).  
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Alltogether I loaded 8792 car images + 8968 non-car images = 17,770  total. Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+I started by reading in all the `vehicle` and `non-vehicle` images.  Alltogether I loaded 8792 car images + 8968 non-car images = 17,760  total. Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![alt text][image1]
 
-You can find more examples in my #3 code cell.
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 ![alt text][image2]
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and choosed `YUV` color space with `orientations=11` and `pixels_per_cell=(16, 16)` and `cells_per_block=(2, 2)`. These values gave me the best accuracy later on classification with resonable good cycle time as well.
+I tried various combinations of parameters and choosed `YCrCb` color space with `orientations=9` and `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`. These values gave me a very good accuracy later on classification with resonable good cycle time as well.
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using the above mentioned HOG features in #8 code cell. I didn not used color features and color histograms at this time as they were not improving significantly the accuracy. 
+I trained a linear SVM using the above mentioned HOG features in #6 code cell. I did used color features and color histogram as well.
 
 ### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search window positions with different scales on lower half of the image (`scale=1.0, 1.5, 2.0, 3.5`). Smaller scaling could occure further ahaid and larger scaling would occur closer to our car (perspective). The `cells_per_block=(2, 2)` would result in moving the windows by 2 pixels.   
+I decided to search window positions with different scales on lower half of the image (`scale=1.0, 1.5, 2.0, 3.0`). Smaller scaling could occure further ahaid and larger scaling would occur closer to our car (perspective). The `cells_per_block=(2, 2)` would result in moving the windows by 2 pixels (basically 75% overlap on the scale = 1.0 64 X 64 WINDOW)  
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YUV 3-channel HOG features which provided a nice result. Also it was quit quick during the video pipeline.  Here are some example images:
+Ultimately I searched on 4 scales using 'YCrCb' 3-channel HOG features with color featured plus color histogram. Also it was quit quick during the video pipeline.  Here are some example images:
 
 ![alt text][image4]
 ---
@@ -102,7 +101,8 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-I used HOG features with YUV color space all channels without color features. I gave me a good result with resonable car detection and without false positives (due to the heat map tresholds). I was trying to keep the pipilen working fast (ie >3 iterations/sec). More robustness could be achived if we not just use classification to detect object and identify cars/non-car object but rather use other deep learning methods (YOLO for example). I will try to utilize YOLO in my next version. Also I would combine this pipeline with the P4 Lane Findings.
+I used HOG features with YCrCb color space on all channels with color features and with color histogram. It gave me a good result with resonable car detection and without false positives (due to the heat map tresholds). There is certain frames though in the video which were falsely identify some are on the dark area with shadows. I suspect some car's pictures are very similar (dark, shadowed cars). I will try to eliminate those from the samples.
+I was trying to keep the pipeline working fast. More robustness could be achived if we not just use classification to detect object and identify cars/non-car object but rather use other deep learning methods (YOLO for example). I will try to utilize YOLO in my next version. Also I would combine this pipeline with the P4 Lane Findings.
 
 Thanks,
 Janos
